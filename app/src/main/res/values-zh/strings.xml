@@ -1,4 +1,5 @@
 <resources>
+    <string name="app_name" translatable="false">whoBIRD</string>
     <string name="samples_zero">无音频输入！</string>
     <string name="ignore_gps_date">忽略GPS位置和时间</string>
     <string name="latitude">纬度</string>
@@ -22,4 +23,9 @@
     <string name="source_microphone">麦克风</string>
     <string name="source_voicerecognition">语音识别</string>
     <string name="settings_audiosource">音频源</string>
+    <string name="settings_notification_sound">提示音</string>
+    <string name="save_wav">保存为 .wav 文件</string>
+    <string name="summary_save_wav">每次检测都会在 Music 目录中保存一个 .wav 文件。需要 Android 12 及以上版本</string>
+    <string name="language">语言</string>
+    <string name="high_contrast_theme">高对比度主题</string>
 </resources>
