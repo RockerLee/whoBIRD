@@ -26,9 +26,9 @@ import java.security.NoSuchAlgorithmException;
 public class Downloader {
     static final String modelFILE = "model.tflite";
     static final String metaModelFILE = "metaModel.tflite";
-    static final String model16URL = "https://raw.githubusercontent.com/woheller69/whoBIRD-TFlite/master/BirdNET_GLOBAL_6K_V2.4_Model_FP16.tflite";
-    static final String model32URL = "https://raw.githubusercontent.com/woheller69/whoBIRD-TFlite/master/BirdNET_GLOBAL_6K_V2.4_Model_FP32.tflite";
-    static final String metaModelURL = "https://raw.githubusercontent.com/woheller69/whoBIRD-TFlite/master/BirdNET_GLOBAL_6K_V2.4_MData_Model_FP16.tflite";
+    static final String model16URL = "BirdNET_GLOBAL_6K_V2.4_Model_FP16.tflite";
+    static final String model32URL = "BirdNET_GLOBAL_6K_V2.4_Model_FP32.tflite";
+    static final String metaModelURL = "BirdNET_GLOBAL_6K_V2.4_MData_Model_FP16.tflite";
     static final String model16MD5 = "b1c981fe261910b473b9b7eec9ebcd4e";
     static final String model32MD5 = "6c7c42106e56550fc8563adb31bc120e";
     static final String metaModelMD5 ="f1a078ae0f244a1ff5a8f1ccb645c805";
@@ -85,17 +85,13 @@ public class Downloader {
             Log.d("whoBIRD", "model file does not exist or wrong model");
             Thread thread = new Thread(() -> {
                 try {
-                    URL url;
-                    if (binding.option32bit.isChecked()) url = new URL(model32URL);
-                    else url = new URL(model16URL);
+                    String fileName = "";
+                    if (binding.option32bit.isChecked()) fileName = model32URL;
+                    else fileName = model16URL;
 
                     Log.d("whoBIRD", "Download model");
 
-                    URLConnection ucon = url.openConnection();
-                    ucon.setReadTimeout(5000);
-                    ucon.setConnectTimeout(10000);
-
-                    InputStream is = ucon.getInputStream();
+                    InputStream is = activity.getAssets().open(fileName);
                     BufferedInputStream inStream = new BufferedInputStream(is, 1024 * 5);
 
                     modelFile.createNewFile();
@@ -157,14 +153,9 @@ public class Downloader {
             Log.d("whoBIRD", "meta model file does not exist");
             Thread thread = new Thread(() -> {
                 try {
-                    URL url = new URL(metaModelURL);
                     Log.d("whoBIRD", "Download meta model");
 
-                    URLConnection ucon = url.openConnection();
-                    ucon.setReadTimeout(5000);
-                    ucon.setConnectTimeout(10000);
-
-                    InputStream is = ucon.getInputStream();
+                    InputStream is = activity.getAssets().open(metaModelURL);
                     BufferedInputStream inStream = new BufferedInputStream(is, 1024 * 5);
 
                     metaModelFile.createNewFile();
